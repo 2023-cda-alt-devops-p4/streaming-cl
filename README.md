@@ -1,1 +1,1 @@
-# streaming-cl
+# Streaming platform
