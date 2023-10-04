@@ -298,19 +298,48 @@ LIMIT 3;
 ```
 
 # Scripts
+
 ### Faire une procédure stockée pour avoir une liste de films d’un réalisateur en particulier
 
 ```sql
-
+DELIMITER //
+CREATE PROCEDURE GetFilmsByDirector(IN director_first_name VARCHAR(50), IN director_last_name VARCHAR(50))
+BEGIN
+    SELECT Films.title
+    FROM Films
+    INNER JOIN Directors ON Films.director_id = Directors.id
+    WHERE Directors.first_name = director_first_name AND Directors.last_name = director_last_name ;
+END //
+DELIMITER ;
 ```
 
-### Pour chaque entrée dans la base de données, avoir une date de création et de modification
+— Appeler la dite procédure
 
 ```sql
-
+CALL GetFilmsByDirector('Justine', 'Triet');
 ```
 
-### Donner des limites d’actions aux utilisateurs s’ils sont administrateur ou non
+### Accorder ou non des privilèges à des utilisateurs
+
+— Accorder des privilèges (ajout, modification, suppression de données) à un administrateur dont l’id est 1.
+
+```sql
+GRANT ALL PRIVILEGES ON mysql-films-db.* TO '1'@'localhost';
+```
+
+— Accorder uniquement le privilège de lecture à un utilisateur dont l’id est 2.
+
+```sql
+GRANT SELECT ON mysql-films-db.* TO '2'@'localhost';
+```
+
+— Recharger les privilèges afin qu’ils prennent effet.
+
+```sql
+FLUSH PRIVILEGES;
+```
+
+### Pour chaque entrée dans la BDD, avoir une date de création et de modification
 
 ```sql
 
