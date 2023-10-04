@@ -1,6 +1,6 @@
 # Platforme de streaming
 
-Cette base de données créée pour un service à destination des **cinéphiles** stocke des informations sur des films, des réalisateurs/rices, des acteurs/rices et les utilisateurs du système.
+Cette base de données, créée pour un service à destination des **cinéphiles**, stocke des informations sur des films, des réalisateurs/rices, des acteurs/rices et les utilisateurs du système.
 
 ## Création de la base de données
 
