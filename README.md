@@ -1,6 +1,6 @@
 # Platforme de streaming
 
-Mot en clair **Mot en gras**.
+Cette base de données créée pour un service à destination des **cinéphiles** stocke des informations sur des films, des réalisateurs/rices, des acteurs/rices et les utilisateurs du système.
 
 ## Création de la base de données
 
@@ -151,13 +151,26 @@ CREATE TABLE Directors_Films (
 #### — Genres
 
 ```sql
-INSERT INTO Genres (name) VALUES ('Action'), ('Comédie'), ('Romance'), ('Comédie dramatique'), ('Drame'), ('Science-fiction'), ('Horreur'), ('Science-fiction horrifique'), ('Thriller'), ('Fantasy'), ('Aventure'), ('Animation'), ('Documentaire'), ('Comédie musicale'), ('Western'), ('Guerre'), ('Fantastique'), ('Historique');
+INSERT INTO Genres (name) VALUES
+    ('Action'), ('Comédie'), ('Romance'),
+    ('Comédie dramatique'), ('Drame'), ('Science-fiction'),
+    ('Horreur'), ('Science-fiction horrifique'), ('Thriller'),
+    ('Fantasy'), ('Aventure'), ('Animation'),
+    ('Documentaire'), ('Comédie musicale'), ('Western'),
+    ('Guerre'), ('Fantastique'), ('Historique');
 ```
 
 #### — Nationalities
 
 ```sql
-INSERT INTO Nationalities (name) VALUES ('Française'), ('Américaine'), ('Britannique'), ('Canadienne'), ('Italienne'), ('Belge'), ('Allemande'), ('Espagnole'), ('Russe'), ('Chinoise'), ('Japonaise'), ('Australienne'), ('Néo-zélandaise'), ('Tchèque'), ('Irlandaise'), ('Iranienne'), ('Indienne'), ('Taïwanaise'), ('Hongkongaise');
+INSERT INTO Nationalities (name) VALUES
+    ('Française'), ('Américaine'), ('Britannique'),
+    ('Canadienne'), ('Italienne'), ('Belge'),
+    ('Allemande'), ('Espagnole'), ('Russe'),
+    ('Chinoise'), ('Japonaise'), ('Australienne'),
+    ('Néo-zélandaise'), ('Tchèque'), ('Irlandaise'),
+    ('Iranienne'), ('Indienne'), ('Taïwanaise'),
+    ('Hongkongaise');
 ```
 
 ### Users
@@ -192,18 +205,113 @@ INSERT INTO Nationalities (name) VALUES ('Française'), ('Américaine'), ('Brita
 
 # Requêtes
 
-## XXXX
+### Les titres et dates de sortie des films du plus récent au plus ancien
 
-`code`
+```sql
+SELECT title, released_in
+FROM Films
+ORDER BY released_in DESC;
+```
 
-## XXXX
+### Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
 
-`code`
+```sql
+SELECT last_name, first_name YEAR(NOW()) - YEAR(date_of_birth) AS age
+FROM Actors
+WHERE YEAR(NOW()) - YEAR(date_of_birth) > 30
+ORDER BY last_name, first_name;
+```
 
-## XXXX
+### La liste des acteurs/actrices principaux pour un film donné
 
-`code`
+Imaginons que l'id du film en question est 5.
 
-## XXXX
+```sql
+SELECT Actors.last_name, Actors.first_name, Actors_Films.role
+FROM Actors
+JOIN Actors_Films ON Actors.id = Actors_Films.actor_id
+WHERE Actors_Films.film_id = 5
+AND Actors_Films.is_lead_actor = 1;
+```
 
-`code`
+### La liste des films pour un acteur/actrice donné/e
+
+Imaginons que l'id de l'acteur/actrice en question est 4.
+
+```sql
+SELECT Films.title, Films.released_in
+FROM Films
+JOIN Actors_Films ON Films.id = Actors_Films.film_id
+JOIN Actors ON Actors.id = Actors_Films.actor_id
+WHERE Actors.id = 4;
+```
+
+### Ajouter un film
+
+Imaginons que l'id du réalisateur américain Ridley Scott est 1.
+
+```sql
+INSERT INTO Films (title, director_id, released_in, duration, genre, description)
+VALUES ('Alien', 1, 1979, 117, 8, 'L''équipage d''un vaisseau spatial est traqué par une créature extraterrestre mortelle, déclenchant une atmosphère de tension et de terreur');
+```
+
+### Ajouter un/e acteur/actrice
+
+L'id de la nationalité américaine est 2.
+
+```sql
+INSERT INTO Actors (first_name, last_name, date_of_birth, nationality)
+VALUES ('Sigourney', 'Weaver', '1949-10-08', 2);
+```
+
+### Indiquer que tel/le acteur/actrice a le rôle principal dans un film donné
+
+Établissons que l'id de Sigourney Weaver est 1 et que celui du film Alien est 2.
+
+```sql
+INSERT INTO Actors_Films (actor_id, film_id, character_name, is_lead_actor)
+VALUES (1, 2, 'Ellen Ripley', 1);
+```
+
+### Modifier un film
+
+```sql
+UPDATE Films
+SET Description = 'Dans l''espace, personne ne vous entendra crier...'
+WHERE name = 'Alien';
+```
+
+### Supprimer un/e acteur/actrice
+
+```sql
+DELETE FROM Actors
+WHERE id = 2;
+```
+
+### Afficher les 3 derniers acteurs/actrices ajouté(e)s
+
+```sql
+SELECT id
+FROM Actors
+ORDER BY id DESC
+LIMIT 3;
+```
+
+# Scripts
+### Faire une procédure stockée pour avoir une liste de films d’un réalisateur en particulier
+
+```sql
+
+```
+
+### Pour chaque entrée dans la base de données, avoir une date de création et de modification
+
+```sql
+
+```
+
+### Donner des limites d’actions aux utilisateurs s’ils sont administrateur ou non
+
+```sql
+
+```
