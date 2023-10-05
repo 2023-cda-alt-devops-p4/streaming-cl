@@ -308,7 +308,7 @@ ORDER BY released_in DESC;
 ### Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
 
 ```sql
-SELECT last_name, first_name YEAR(NOW()) - YEAR(date_of_birth) AS age
+SELECT last_name, first_name, YEAR(NOW()) - YEAR(date_of_birth) AS age
 FROM Actors
 WHERE YEAR(NOW()) - YEAR(date_of_birth) > 30
 ORDER BY last_name, first_name;
@@ -316,13 +316,13 @@ ORDER BY last_name, first_name;
 
 ### La liste des acteurs/actrices principaux pour un film donné
 
-Imaginons que l'id du film en question est 5.
+Imaginons que l'id du film en question est 8.
 
 ```sql
-SELECT Actors.last_name, Actors.first_name, Actors_Films.role
+SELECT Actors.last_name, Actors.first_name, Actors_Films.character_name
 FROM Actors
 JOIN Actors_Films ON Actors.id = Actors_Films.actor_id
-WHERE Actors_Films.film_id = 5
+WHERE Actors_Films.film_id = 8
 AND Actors_Films.is_lead_actor = 1;
 ```
 
@@ -341,7 +341,7 @@ WHERE Actors.id = 4;
 ### Ajouter un film
 
 ```sql
-INSERT INTO Films (title, released_in, duration, genre, description)
+INSERT INTO Films (title, released_in, duration, genre_id, description)
 VALUES ('Alien', 1979, 117, 8, 'L''équipage d''un vaisseau spatial est traqué par une créature extraterrestre mortelle, déclenchant une atmosphère de tension et de terreur');
 ```
 
@@ -350,7 +350,7 @@ VALUES ('Alien', 1979, 117, 8, 'L''équipage d''un vaisseau spatial est traqué 
 L'id de la nationalité américaine est 2.
 
 ```sql
-INSERT INTO Actors (first_name, last_name, date_of_birth, nationality)
+INSERT INTO Actors (first_name, last_name, date_of_birth, nationality_id)
     VALUES ('Sigourney', 'Weaver', '1949-10-08', 2);
 ```
 
@@ -368,20 +368,20 @@ INSERT INTO Actors_Films (actor_id, film_id, character_name, is_lead_actor)
 ```sql
 UPDATE Films
 SET Description = 'Dans l''espace, personne ne vous entendra crier...'
-WHERE name = 'Alien';
+WHERE id = 11;
 ```
 
 ### Supprimer un/e acteur/actrice
 
 ```sql
 DELETE FROM Actors
-WHERE id = 2;
+WHERE id = 10;
 ```
 
 ### Afficher les 3 derniers acteurs/actrices ajouté(e)s
 
 ```sql
-SELECT id
+SELECT id, first_name, last_name
 FROM Actors
 ORDER BY id DESC
 LIMIT 3;
