@@ -9,8 +9,7 @@ Cette table enregistre des informations sur des **films**.
 | Nom         | Type         | Description                                                                                                             |
 | ----------- | ------------ | ----------------------------------------------------------------------------------------------------------------------- |
 | id          | INT          | Identifiant unique du film (clé primaire)                                                                               |
-| title       | VARCHAR(255) | Titre du film                                                                                                           |
-| director_id | INT          | Identifiant du réalisateur du film (clé étrangère vers la table Directors)                                              |
+| title       | VARCHAR(255) | Titre du film                                                                                                           |                                             |
 | released_in | INT          | Année de sortie du film                                                                                                 |
 | duration    | INT          | Durée du film en minutes                                                                                                |
 | genre_id    | INT          | Identifiant du genre du film (clé étrangère vers la table Genres)                                                       |
@@ -22,7 +21,6 @@ Cette table enregistre des informations sur des **films**.
 
 - La clé primaire est l'`id`.
 - La contrainte `fk_genre_film` crée une relation avec la table `Genres` en utilisant comme clé étrangère `genre_id`.
-- La contrainte `fk_director_film` crée une relation avec la table `Directors` en utilisant comme clé étrangère `director_id`.
 
 ## Genres
 
