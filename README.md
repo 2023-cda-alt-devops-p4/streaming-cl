@@ -103,10 +103,10 @@ CREATE TABLE Favorites (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     user_id INT,
     film_id INT,
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	CONSTRAINT fk_user_favorite FOREIGN KEY (user_id) REFERENCES Users(id),
-	CONSTRAINT fk_film_favorite FOREIGN KEY (film_id) REFERENCES Films(id)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_user_favorite FOREIGN KEY (user_id) REFERENCES Users(id),
+    CONSTRAINT fk_film_favorite FOREIGN KEY (film_id) REFERENCES Films(id)
 );
 ```
 
@@ -119,12 +119,12 @@ CREATE TABLE Actors_Films (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     actor_id INT,
     film_id INT,
-	character_name VARCHAR(255),
-	is_lead_actor BOOLEAN,
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    character_name VARCHAR(255),
+    is_lead_actor BOOLEAN,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_actor_actors_films FOREIGN KEY (actor_id) REFERENCES Actors(id),
-	CONSTRAINT fk_film_actors_films FOREIGN KEY (film_id) REFERENCES Films(id)
+    CONSTRAINT fk_film_actors_films FOREIGN KEY (film_id) REFERENCES Films(id)
 );
 ```
 
@@ -135,10 +135,10 @@ CREATE TABLE Directors_Films (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     director_id INT,
     film_id INT,
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_director_directors_films FOREIGN KEY (director_id) REFERENCES Directors(id),
-	CONSTRAINT fk_film_directors_films FOREIGN KEY (film_id) REFERENCES Films(id)
+    CONSTRAINT fk_film_directors_films FOREIGN KEY (film_id) REFERENCES Films(id)
 );
 ```
 
@@ -204,48 +204,60 @@ INSERT INTO Actors (first_name, last_name, date_of_birth, nationality_id) VALUES
 INSERT INTO Directors (first_name, last_name, date_of_birth, nationality_id) VALUES
     ('Ridley', 'Scott', '1937-11-30', 2),
     ('Justine', 'Triet', '1978-07-17', 1),
-	('James', 'Cameron', '1954-08-16', 4),
+    ('James', 'Cameron', '1954-08-16', 4),
     ('Roger', 'Allers', '1949-06-29', 2),
     ('Rob', 'Minkoff', '1962-08-11', 2),
     ('Miloš', 'Forman', '1932-02-18', 14),
     ('Jane', 'Campion', '1954-04-30', 13),
     ('Steven', 'Spielberg', '1946-12-18', 2),
     ('Chris', 'Buck', '1958-02-24', 2),
-	('Jennifer', 'Lee', '1971-10-22', 2),
-	('Greta', 'Gerwig', '1983-08-04', 2),
-	('Martin', 'Scorsese', '1942-11-17', 2);
+    ('Jennifer', 'Lee', '1971-10-22', 2),
+    ('Greta', 'Gerwig', '1983-08-04', 2),
+    ('Martin', 'Scorsese', '1942-11-17', 2);
 ```
 
 ### Films
 
 ```sql
 INSERT INTO Films (title, released_in, duration, genre_id, description) VALUES
-	('Le Roi Lion', 1994, 88, 12, 'Ce chef-d''œuvre de Disney raconte l''épopée de Simba, un jeune lion qui doit surmonter des épreuves pour réclamer sa place légitime en tant que roi de la savane.'),
-    ('Vol au-dessus d’un nid de coucou', 1975, 133, 5, 'Un drame psychiatrique captivant où un détenu feint la folie pour échapper à la prison, mais se retrouve confronté à une institution mentale tyrannique.'),
-    ('Titanic', 1997, 195, 5, 'L''histoire d''amour tragique entre Jack et Rose, deux passagers du célèbre paquebot, alors qu''ils luttent pour survivre au naufrage.'),
-    ('La Reine des Neiges', 2013, 102, 12, 'Un conte magique d''amour fraternel entre deux sœurs, Elsa et Anna, alors qu''Elsa doit apprendre à maîtriser ses pouvoirs de glace.'),
-    ('Anatomie d’une chute', 2023, 152, 5, 'Ce drame explore les conséquences émotionnelles, familiales et judiciaires d’une tragique chute mortelle du haut d’un chalet.'),
-    ('La Leçon de piano', 1993, 121, 5, 'L''histoire d''une femme muette du 19e siècle qui trouve la liberté et l''expression à travers sa passion pour le piano.'),
-    ('Jurassic Park', 1993, 127, 17, 'Un parc à thème peuplé de dinosaures clonés devient rapidement un cauchemar lorsque les créatures s''échappent.'),
-    ('Barbie', 2023, 115, 17, 'À Barbie Land, vous êtes un être parfait dans un monde parfait. Sauf si vous êtes en crise existentielle ou si vous êtes Ken.'),
-    ('Le Loup de Wall Street', 2013, 180, 19, 'La vie scandaleuse du courtier en bourse Jordan Belfort, ses excès, sa richesse et sa chute.'),
-    ('Blade Runner', 1982, 117, 6, 'Une dystopie sombre où des chasseurs de primes traquent des répliquants, des androïdes humanoïdes.');
+    ('Le Roi Lion', 1994, 88, 12, 'Ce chef-d''œuvre de Disney raconte l''épopée de Simba, 
+	un jeune lion qui doit surmonter des épreuves pour réclamer sa place légitime en 
+	tant que roi de la savane.'),
+    ('Vol au-dessus d’un nid de coucou', 1975, 133, 5, 'Un drame psychiatrique captivant 
+	où un détenu feint la folie pour échapper à la prison, mais se retrouve confronté 
+	à une institution mentale tyrannique.'),
+    ('Titanic', 1997, 195, 5, 'L''histoire d''amour tragique entre Jack et Rose, deux 
+	passagers du célèbre paquebot, alors qu''ils luttent pour survivre au naufrage.'),
+    ('La Reine des Neiges', 2013, 102, 12, 'Un conte magique d''amour fraternel entre deux 
+	sœurs, Elsa et Anna, alors qu''Elsa doit apprendre à maîtriser ses pouvoirs de glace.'),
+    ('Anatomie d’une chute', 2023, 152, 5, 'Ce drame explore les conséquences émotionnelles, 
+	familiales et judiciaires d’une tragique chute mortelle du haut d’un chalet.'),
+    ('La Leçon de piano', 1993, 121, 5, 'L''histoire d''une femme muette du 19e siècle qui 
+	trouve la liberté et l''expression à travers sa passion pour le piano.'),
+    ('Jurassic Park', 1993, 127, 17, 'Un parc à thème peuplé de dinosaures clonés devient 
+	rapidement un cauchemar lorsque les créatures s''échappent.'),
+    ('Barbie', 2023, 115, 17, 'À Barbie Land, vous êtes un être parfait dans un monde parfait. 
+	Sauf si vous êtes en crise existentielle ou si vous êtes Ken.'),
+    ('Le Loup de Wall Street', 2013, 180, 19, 'La vie scandaleuse du courtier en bourse Jordan 
+	Belfort, ses excès, sa richesse et sa chute.'),
+    ('Blade Runner', 1982, 117, 6, 'Une dystopie sombre où des chasseurs de primes traquent 
+	des répliquants, des androïdes humanoïdes.');
 ```
 
 ### Favorites
 
-Si Céline Dubois (id 2) a comme film préféré La Leçon de piano (id 6).
+Céline Dubois (id 2) a comme film préféré La Leçon de piano (id 6).
 
 ```sql
 INSERT INTO Favorites (user_id, film_id)
-VALUES (2, 6);
+    VALUES (2, 6);
 ```
 
-Si Éric Petit (id 5) a comme film favori Le Roi Lion (id 1).
+Éric Petit (id 5) a comme film favori Le Roi Lion (id 1).
 
 ```sql
 INSERT INTO Favorites (user_id, film_id)
-VALUES (5, 1);
+    VALUES (5, 1);
 ```
 
 ### Tables de liaison
@@ -278,7 +290,9 @@ INSERT INTO Actors_Films (actor_id, film_id, character_name, is_lead_actor) VALU
 
 ```sql
 INSERT INTO Directors_Films (director_id, film_id)
-VALUES (1, 10), (2, 5), (3, 3), (4, 1), (5, 1), (6, 2), (7, 6), (8, 7), (9, 4), (10, 4), (11, 8), (12, 9);
+    VALUES (1, 10), (2, 5), (3, 3), (4, 1), (5, 1), 
+	(6, 2), (7, 6), (8, 7), (9, 4), (10, 4),
+	(11, 8), (12, 9);
 ```
 
 # Requêtes
@@ -337,7 +351,7 @@ L'id de la nationalité américaine est 2.
 
 ```sql
 INSERT INTO Actors (first_name, last_name, date_of_birth, nationality)
-VALUES ('Sigourney', 'Weaver', '1949-10-08', 2);
+    VALUES ('Sigourney', 'Weaver', '1949-10-08', 2);
 ```
 
 ### Indiquer que tel/le acteur/actrice a le rôle principal dans un film donné
@@ -346,7 +360,7 @@ VALUES ('Sigourney', 'Weaver', '1949-10-08', 2);
 
 ```sql
 INSERT INTO Actors_Films (actor_id, film_id, character_name, is_lead_actor)
-VALUES (11, 11, 'Ellen Ripley', 1);
+    VALUES (11, 11, 'Ellen Ripley', 1);
 ```
 
 ### Modifier un film
