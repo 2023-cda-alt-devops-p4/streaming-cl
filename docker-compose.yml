@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  mysql-films-db:
+    image: mysql
+    container_name: mysql-films-db
+    environment:
+      MYSQL_ROOT_PASSWORD: SimplonRoot2023!
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./SQL\ Scripts:/docker-entrypoint-initdb.d
