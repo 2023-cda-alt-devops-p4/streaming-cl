@@ -10,7 +10,7 @@ CREATE DATABASE filmsdb;
 
 ## Création des tables
 
-L'**ordre** de création des tables est important. Il vaut mieux commencer par les **tables de références** et finir par les **tables de liaison**.
+L'**ordre** de création des tables est important. Il vaut mieux commencer par les **tables de référence** et finir par les **tables de liaison**.
 
 ### Tables de référence
 
@@ -415,7 +415,7 @@ CALL GetFilmsByDirector('Justine', 'Triet');
 ```sql
 CREATE USER 'Etienne'@'localhost' IDENTIFIED BY 'password7890';
 
-GRANT ALL PRIVILEGES ON mysqlfilmsdb.* TO 'Etienne'@'localhost';
+GRANT ALL PRIVILEGES ON filmsdb.* TO 'Etienne'@'localhost';
 ```
 
 — Vérifier les privilèges de l'utilisateur Etienne.
@@ -427,7 +427,9 @@ show grants for 'Etienne'@'localhost';
 — Accorder uniquement le privilège de lecture à un utilisateur appelé Andrea.
 
 ```sql
-GRANT SELECT ON mysql-films-db.* TO 'Andrea'@'localhost';
+CREATE USER 'Andrea'@'localhost' IDENTIFIED BY 'password78!96';
+
+GRANT SELECT ON filmsdb.* TO 'Andrea'@'localhost';
 ```
 
 — Recharger les privilèges afin qu’ils prennent effet.
@@ -447,7 +449,7 @@ FLUSH PRIVILEGES;
 — Démarrer le conteneur.
 
 ```
-docker compose up
+docker compose up -d
 ```
 
 — Pour avoir l'id du conteneur démarré.

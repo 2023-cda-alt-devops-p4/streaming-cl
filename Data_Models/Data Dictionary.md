@@ -1,6 +1,6 @@
 # Dictionnaire de données
 
-Base de données : `mysql-films-db`
+Base de données : `filmsdb`
 
 ## Films
 
