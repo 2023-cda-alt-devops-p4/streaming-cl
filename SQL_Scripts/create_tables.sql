@@ -1,4 +1,6 @@
-CREATE DATABASE mysql-films-db;
+CREATE DATABASE mysqlfilmsdb;
+
+USE mysqlfilmsdb;
 
 CREATE TABLE Genres (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,

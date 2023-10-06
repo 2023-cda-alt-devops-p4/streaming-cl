@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   mysql-films-db:
@@ -9,4 +9,6 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./SQL\ Scripts:/docker-entrypoint-initdb.d
+      - mysql-films-db:/var/lib/mysql
+volumes:
+  mysql-films-db:

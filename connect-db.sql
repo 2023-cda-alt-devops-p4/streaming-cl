@@ -1,1 +1,0 @@
-USE mysql-films-db;
