@@ -5,7 +5,7 @@ Cette base de données, créée pour un service à destination des **cinéphiles
 ## Création de la base de données
 
 ```sql
-CREATE DATABASE mysql-films-db;
+CREATE DATABASE filmsdb;
 ```
 
 ## Création des tables
@@ -220,27 +220,27 @@ INSERT INTO Directors (first_name, last_name, date_of_birth, nationality_id) VAL
 
 ```sql
 INSERT INTO Films (title, released_in, duration, genre_id, description) VALUES
-    ('Le Roi Lion', 1994, 88, 12, 'Ce chef-d''œuvre de Disney raconte l''épopée de Simba, 
-	un jeune lion qui doit surmonter des épreuves pour réclamer sa place légitime en 
+    ('Le Roi Lion', 1994, 88, 12, 'Ce chef-d''œuvre de Disney raconte l''épopée de Simba,
+	un jeune lion qui doit surmonter des épreuves pour réclamer sa place légitime en
 	tant que roi de la savane.'),
-    ('Vol au-dessus d’un nid de coucou', 1975, 133, 5, 'Un drame psychiatrique captivant 
-	où un détenu feint la folie pour échapper à la prison, mais se retrouve confronté 
+    ('Vol au-dessus d’un nid de coucou', 1975, 133, 5, 'Un drame psychiatrique captivant
+	où un détenu feint la folie pour échapper à la prison, mais se retrouve confronté
 	à une institution mentale tyrannique.'),
-    ('Titanic', 1997, 195, 5, 'L''histoire d''amour tragique entre Jack et Rose, deux 
+    ('Titanic', 1997, 195, 5, 'L''histoire d''amour tragique entre Jack et Rose, deux
 	passagers du célèbre paquebot, alors qu''ils luttent pour survivre au naufrage.'),
-    ('La Reine des Neiges', 2013, 102, 12, 'Un conte magique d''amour fraternel entre deux 
+    ('La Reine des Neiges', 2013, 102, 12, 'Un conte magique d''amour fraternel entre deux
 	sœurs, Elsa et Anna, alors qu''Elsa doit apprendre à maîtriser ses pouvoirs de glace.'),
-    ('Anatomie d’une chute', 2023, 152, 5, 'Ce drame explore les conséquences émotionnelles, 
+    ('Anatomie d’une chute', 2023, 152, 5, 'Ce drame explore les conséquences émotionnelles,
 	familiales et judiciaires d’une tragique chute mortelle du haut d’un chalet.'),
-    ('La Leçon de piano', 1993, 121, 5, 'L''histoire d''une femme muette du 19e siècle qui 
+    ('La Leçon de piano', 1993, 121, 5, 'L''histoire d''une femme muette du 19e siècle qui
 	trouve la liberté et l''expression à travers sa passion pour le piano.'),
-    ('Jurassic Park', 1993, 127, 17, 'Un parc à thème peuplé de dinosaures clonés devient 
+    ('Jurassic Park', 1993, 127, 17, 'Un parc à thème peuplé de dinosaures clonés devient
 	rapidement un cauchemar lorsque les créatures s''échappent.'),
-    ('Barbie', 2023, 115, 17, 'À Barbie Land, vous êtes un être parfait dans un monde parfait. 
+    ('Barbie', 2023, 115, 17, 'À Barbie Land, vous êtes un être parfait dans un monde parfait.
 	Sauf si vous êtes en crise existentielle ou si vous êtes Ken.'),
-    ('Le Loup de Wall Street', 2013, 180, 19, 'La vie scandaleuse du courtier en bourse Jordan 
+    ('Le Loup de Wall Street', 2013, 180, 19, 'La vie scandaleuse du courtier en bourse Jordan
 	Belfort, ses excès, sa richesse et sa chute.'),
-    ('Blade Runner', 1982, 117, 6, 'Une dystopie sombre où des chasseurs de primes traquent 
+    ('Blade Runner', 1982, 117, 6, 'Une dystopie sombre où des chasseurs de primes traquent
 	des répliquants, des androïdes humanoïdes.');
 ```
 
@@ -290,7 +290,7 @@ INSERT INTO Actors_Films (actor_id, film_id, character_name, is_lead_actor) VALU
 
 ```sql
 INSERT INTO Directors_Films (director_id, film_id)
-    VALUES (1, 10), (2, 5), (3, 3), (4, 1), (5, 1), 
+    VALUES (1, 10), (2, 5), (3, 3), (4, 1), (5, 1),
 	(6, 2), (7, 6), (8, 7), (9, 4), (10, 4),
 	(11, 8), (12, 9);
 ```
@@ -387,8 +387,6 @@ ORDER BY id DESC
 LIMIT 3;
 ```
 
-# Scripts
-
 ### Faire une procédure stockée pour avoir une liste de films d’un réalisateur en particulier
 
 ```sql
@@ -397,8 +395,9 @@ CREATE PROCEDURE GetFilmsByDirector(IN director_first_name VARCHAR(50), IN direc
 BEGIN
     SELECT Films.title
     FROM Films
-    INNER JOIN Directors ON Films.director_id = Directors.id
-    WHERE Directors.first_name = director_first_name AND Directors.last_name = director_last_name ;
+    INNER JOIN Directors_Films ON Films.id = Directors_Films.film_id
+    INNER JOIN Directors ON Directors_Films.director_id = Directors.id
+    WHERE Directors.first_name = director_first_name AND Directors.last_name = director_last_name;
 END //
 DELIMITER ;
 ```
@@ -411,16 +410,24 @@ CALL GetFilmsByDirector('Justine', 'Triet');
 
 ### Accorder ou non des privilèges à des utilisateurs
 
-— Accorder des privilèges (ajout, modification, suppression de données) à un administrateur dont l’id est 1.
+— Accorder des privilèges (ajout, modification, suppression de données) à un administrateur appelé Etienne.
 
 ```sql
-GRANT ALL PRIVILEGES ON mysql-films-db.* TO '1'@'localhost';
+CREATE USER 'Etienne'@'localhost' IDENTIFIED BY 'password7890';
+
+GRANT ALL PRIVILEGES ON mysqlfilmsdb.* TO 'Etienne'@'localhost';
 ```
 
-— Accorder uniquement le privilège de lecture à un utilisateur dont l’id est 2.
+— Vérifier les privilèges de l'utilisateur Etienne.
 
 ```sql
-GRANT SELECT ON mysql-films-db.* TO '2'@'localhost';
+show grants for 'Etienne'@'localhost';
+```
+
+— Accorder uniquement le privilège de lecture à un utilisateur appelé Andrea.
+
+```sql
+GRANT SELECT ON mysql-films-db.* TO 'Andrea'@'localhost';
 ```
 
 — Recharger les privilèges afin qu’ils prennent effet.
@@ -433,4 +440,82 @@ FLUSH PRIVILEGES;
 
 ```sql
 
+```
+
+# Commandes Docker
+
+— Démarrer le conteneur.
+
+```
+docker compose up
+```
+
+— Pour avoir l'id du conteneur démarré.
+
+```
+docker ps
+```
+
+— Faire une copie des scripts à exécuter dans l'image Docker pour créer la database et insérer des données, en utilisant l'id du conteneur.
+⚠️ Le copier-coller et l'insérer dans la commande.
+
+```
+docker cp SQL_Scripts/create_tables.sql 6ec8960390aa:create_tables.sql
+docker cp SQL_Scripts/insert_data.sql 6ec8960390aa:insert_data.sql
+```
+
+— Démarrer une session SQL dans le Terminal en tant qu'utilisateur root.
+🎈 Le mot de passe à entrer est inscrit dans le fichier `docker-compose.yml`.
+
+```
+docker exec -it 6ec8960390aa mysql -u root -p
+```
+
+— Dans la console SQL, pour voir les bases de données.
+
+```sql
+show databases;
+```
+
+— Pour sélectionner la base sur laquelle on veut travailler.
+
+```sql
+use filmsdb
+```
+
+— Pour exécuter le script qui crée les tables.
+
+```sql
+source create_tables.sql
+```
+
+— Pour vérifier que les tables ont été créées.
+
+```sql
+show tables;
+```
+
+— Pour exécuter le script qui insère des données dans les tables.
+
+```sql
+source insert_data.sql
+```
+
+— Pour vérifier que des données ont été intégrées à une table en particulier.
+
+```sql
+select * from Actors;
+```
+
+— Pour stopper le conteneur.
+
+```
+docker compose stop
+```
+
+— Pour arrêter Docker.
+
+```
+docker compose down
+docker system prune
 ```

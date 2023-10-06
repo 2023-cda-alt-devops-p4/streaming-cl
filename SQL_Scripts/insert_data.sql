@@ -1,3 +1,5 @@
+USE filmsdb;
+
 INSERT INTO
     Genres (name)
 VALUES

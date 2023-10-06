@@ -6,6 +6,9 @@ services:
     container_name: mysql-films-db
     environment:
       MYSQL_ROOT_PASSWORD: SimplonRoot2023!
+      MYSQL_DATABASE: filmsdb
+      MYSQL_USER: snoopy
+      MYSQL_PASSWORD: snoopy123!
     ports:
       - "3306:3306"
     volumes:
