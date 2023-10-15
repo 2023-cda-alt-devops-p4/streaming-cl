@@ -63,6 +63,12 @@ source insert_data.sql
 select * from Actors;
 ```
 
+— Pour stopper la console.
+
+```sql
+exit
+```
+
 — Pour stopper le conteneur.
 
 ```
