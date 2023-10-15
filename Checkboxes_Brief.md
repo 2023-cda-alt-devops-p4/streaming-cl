@@ -24,7 +24,8 @@
 
 ## Démarrage du conteneur Docker
 
-- [ ] Les instructions données dans le README fonctionnent pour lancer le Docker
+- [ ] Un environnement Docker a été créé
+- [ ] Les instructions données dans le README ou le fichier Docker_HowToDo fonctionnent pour lancer le conteneur Docker
 
 ## Requêtes SQL
 
@@ -40,5 +41,20 @@ Les requêtes suivantes fonctionnent :
 - [ ] Modifier un film
 - [ ] Supprimer un/e acteur/actrice
 - [ ] Afficher les 3 derniers acteurs/actrices ajouté(e)s
+
+## Manipulations avancées
+
+Les manipulations avancées suivantes fonctionnent :
+
 - [ ] Avoir une liste de films d’un réalisateur en particulier (**procédure stockée**)
 - [ ] Accorder ou non des privilèges à des utilisateurs
+- [ ] Trigger (...)
+
+## Contraintes
+
+- [ ] Un fichier permettant de générer la BDD a été réalisé
+- [ ] Ce dernier comporte quelques données
+- [ ] Le jeu de requêtes est situé dans le README
+- [ ] Un trigger (ou déclencheur) a été mis en place
+- [ ] Seul l’administrateur de la BDD peut ajouter, modifier ou supprimer des données
+- [ ] Pour chaque entrée dans la BDD, il y a la date de création et de modification
