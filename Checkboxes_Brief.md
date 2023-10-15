@@ -1,5 +1,7 @@
 # Critères d'évaluation
 
+Pour cocher ou décocher des tâches, vous devrez **éditer** le fichier et remplir ainsi la case : [x].
+
 ## Modèles de données
 
 ### Dictionnaire de données
