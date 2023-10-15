@@ -1,9 +1,7 @@
 USE filmsdb;
 
-INSERT INTO
-    Genres (name)
-VALUES
-    ('Action'),
+INSERT INTO Genres (name)
+VALUES ('Action'),
     ('Comédie'),
     ('Romance'),
     ('Comédie dramatique'),
@@ -23,10 +21,8 @@ VALUES
     ('Historique'),
     ('Comédie noire');
 
-INSERT INTO
-    Nationalities (name)
-VALUES
-    ('Française'),
+INSERT INTO Nationalities (name)
+VALUES ('Française'),
     ('Américaine'),
     ('Britannique'),
     ('Canadienne'),
@@ -46,10 +42,8 @@ VALUES
     ('Taïwanaise'),
     ('Hongkongaise');
 
-INSERT INTO
-    Users (first_name, last_name, email, password)
-VALUES
-    (
+INSERT INTO Users (first_name, last_name, email, password)
+VALUES (
         'Camille',
         'Lafrance',
         'c.lafrance@gmail.com',
@@ -75,15 +69,13 @@ VALUES
     ),
     ('Éric', 'Petit', 'epetit@hotmail.fr', 'mdp789!');
 
-INSERT INTO
-    Actors (
+INSERT INTO Actors (
         first_name,
         last_name,
         date_of_birth,
         nationality_id
     )
-VALUES
-    ('Kate', 'Winslet', '1975-10-05', 3),
+VALUES ('Kate', 'Winslet', '1975-10-05', 3),
     ('Jack', 'Nicholson', '1937-04-22', 2),
     ('Holly', 'Hunter', '1958-03-20', 2),
     ('Sam', 'Neill', '1947-09-14', 3),
@@ -94,15 +86,13 @@ VALUES
     ('Benjamin', 'Voisin', '1996-12-24', 1),
     ('Sophia', 'Loren', '1934-09-20', 5);
 
-INSERT INTO
-    Directors (
+INSERT INTO Directors (
         first_name,
         last_name,
         date_of_birth,
         nationality_id
     )
-VALUES
-    ('Ridley', 'Scott', '1937-11-30', 2),
+VALUES ('Ridley', 'Scott', '1937-11-30', 2),
     ('Justine', 'Triet', '1978-07-17', 1),
     ('James', 'Cameron', '1954-08-16', 4),
     ('Roger', 'Allers', '1949-06-29', 2),
@@ -115,16 +105,14 @@ VALUES
     ('Greta', 'Gerwig', '1983-08-04', 2),
     ('Martin', 'Scorsese', '1942-11-17', 2);
 
-INSERT INTO
-    Films (
+INSERT INTO Films (
         title,
         released_in,
         duration,
         genre_id,
         description
     )
-VALUES
-    (
+VALUES (
         'Le Roi Lion',
         1994,
         88,
@@ -195,24 +183,19 @@ VALUES
         'Une dystopie sombre où des chasseurs de primes traquent des répliquants, des androïdes humanoïdes.'
     );
 
--- Favorites
+-- FAVORITES
+
 -- Céline Dubois (2) ❤ La Leçon de piano (6)
-INSERT INTO
-    Favorites (user_id, film_id)
-VALUES
-    (2, 6);
+INSERT INTO Favorites (user_id, film_id)
+VALUES (2, 6);
 
 -- Éric Petit (5) ❤ Le Roi Lion (1)
-INSERT INTO
-    Favorites (user_id, film_id)
-VALUES
-    (5, 1);
+INSERT INTO Favorites (user_id, film_id)
+VALUES (5, 1);
 
--- Relations between actors & films
-INSERT INTO
-    Actors_Films (actor_id, film_id, character_name, is_lead_actor)
-VALUES
-    (1, 3, 'Rose DeWitt Bukater', 1),
+-- RELATIONS BETWEEN ACTORS & FILMS
+INSERT INTO Actors_Films (actor_id, film_id, character_name, is_lead_actor)
+VALUES (1, 3, 'Rose DeWitt Bukater', 1),
     (2, 2, 'Randall Patrick McMurphy', 1),
     (3, 6, 'Ada McGrath', 1),
     (4, 7, 'Alan Grant', 1),
@@ -223,11 +206,9 @@ VALUES
     (6, 9, 'Jordan Belfort', 1),
     (7, 8, 'Ken', 0);
 
--- Relations between directors & films
-INSERT INTO
-    Directors_Films (director_id, film_id)
-VALUES
-    (1, 10),
+-- RELATIONS BETWEEN DIRECTORS & FILMS
+INSERT INTO Directors_Films (director_id, film_id)
+VALUES (1, 10),
     (2, 5),
     (3, 3),
     (4, 1),
