@@ -47,8 +47,8 @@ Les requêtes suivantes fonctionnent :
 Les manipulations avancées suivantes fonctionnent :
 
 - [ ] Avoir une liste de films d’un réalisateur en particulier (**procédure stockée**)
-- [ ] Accorder ou non des privilèges à des utilisateurs
-- [ ] Trigger (...)
+- [ ] Accorder ou non des **privilèges** à des utilisateurs
+- [ ] Garder (grâce à un **trigger**) une trace de toutes les modifications apportées à la table des utilisateurs
 
 ## Contraintes
 
