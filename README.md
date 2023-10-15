@@ -95,8 +95,8 @@ CREATE TABLE Films (
     CONSTRAINT fk_genre_film FOREIGN KEY (genre_id) REFERENCES Genres(id)
 );
 ```
-
-### Favorites
+### Tables de liaison
+#### — Favorites
 
 ```sql
 CREATE TABLE Favorites (
@@ -109,8 +109,6 @@ CREATE TABLE Favorites (
     CONSTRAINT fk_film_favorite FOREIGN KEY (film_id) REFERENCES Films(id)
 );
 ```
-
-### Tables de liaison
 
 #### — Actors_Films
 
@@ -244,7 +242,9 @@ INSERT INTO Films (title, released_in, duration, genre_id, description) VALUES
 	des répliquants, des androïdes humanoïdes.');
 ```
 
-### Favorites
+### Tables de liaison
+
+#### — Favorites
 
 Céline Dubois (id 2) a comme film préféré La Leçon de piano (id 6).
 
@@ -259,8 +259,6 @@ INSERT INTO Favorites (user_id, film_id)
 INSERT INTO Favorites (user_id, film_id)
     VALUES (5, 1);
 ```
-
-### Tables de liaison
 
 #### — Actors_Films
 
@@ -387,6 +385,7 @@ ORDER BY id DESC
 LIMIT 3;
 ```
 
+# Manipulations avancées
 ### Faire une procédure stockée pour avoir une liste de films d’un réalisateur en particulier
 
 ```sql
@@ -438,7 +437,7 @@ GRANT SELECT ON filmsdb.* TO 'Andrea'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-### Pour chaque entrée dans la BDD, avoir une date de création et de modification
+### Garder grâce à un trigger une trace de toutes les modifications apportées à la table des utilisateurs
 
 ```sql
 
